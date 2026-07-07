@@ -6,13 +6,14 @@ let comidaX = 0;
 let comidaY = 0;
 let puntaje = 0;
 let tiempo = 10;
+let juego = null;
 const ALTO_GATO =30;
 const ANCHO_GATO = 100;
 const ALTO_COMIDA = 30;
 const ANCHO_COMIDA = 30;
 
 function iniciarJuego(){
-    setInterval(restarTiempo, 1000);
+    juego = setInterval(restarTiempo, 1000);
     gatoX = canvas.width/2 - ANCHO_GATO/2;
     gatoY = canvas.height/2 - ALTO_GATO/2;
     comidaX = canvas.width - ANCHO_COMIDA;
@@ -88,4 +89,24 @@ function aparecerComida() {
 function restarTiempo() {
     tiempo--;
     mostrarEnSpan("tiempo", tiempo);
+    if (puntaje == 6) {
+        alert("Ganaste");
+        clearInterval(juego);
+    } else if (tiempo == 0) {
+         alert("Perdiste");
+        clearInterval(juego);
+    }
+}
+
+function reiniciarJuego() {
+    if (juego) {
+        clearInterval(juego);
+        juego = null;
+    }
+    puntaje = 0;
+    tiempo = 10;
+    mostrarEnSpan("puntos", puntaje);
+    mostrarEnSpan("tiempo", tiempo);
+    limpiarCanvas();
+    iniciarJuego();
 }
