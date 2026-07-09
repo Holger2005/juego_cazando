@@ -22,7 +22,7 @@ function iniciarJuego(){
     graficarComida();
 }
 function graficarGato() {
-    graficarRectangulo(gatoX, gatoY, ANCHO_GATO, ALTO_GATO, "red");
+    graficarRectangulo(gatoX, gatoY, ANCHO_GATO, ALTO_GATO, "orange");
 }
 
 function graficarComida() {
