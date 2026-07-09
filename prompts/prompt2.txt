@@ -1,0 +1,1 @@
+Incorpora esta imagen como fondo (background) en la página,con un efecto de opacado, para que el color de letras no se vean afectadas, igualmente manten separado el html y el css
