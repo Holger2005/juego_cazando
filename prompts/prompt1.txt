@@ -1,0 +1,1 @@
+Actúa como un diseñador gráfico, mejora la interfaz gráfica del juego, modifica el html y el css, no cambies los ids de los componentes y mantén separados el css y el html.

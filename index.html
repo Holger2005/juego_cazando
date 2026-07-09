@@ -1,39 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Juego Cazando</title>
   <link rel="stylesheet" href="cazando.css">
   <script src="utils.js"></script>
 </head>
 <body onload="iniciarJuego()">
 
-  <h1>Juego Cazando 2</h1>
-  <p>Autor: Holger Ordoñez</p>
-  <canvas id="areaJuego" width="500" height="500"></canvas>
+  <div class="main-container">
+    <header>
+      <h1>Juego Cazando</h1>
+      <p class="autor">Autor: Holger Ordoñez</p>
+    </header>
 
+    <div class="game-layout">
+      <div class="canvas-container">
+        <canvas id="areaJuego" width="500" height="500"></canvas>
+        <p id="mensaje"></p>
+      </div>
 
-  <div class="controles">
-    <button onclick="moverArriba()">⬆</button>
-    <br>
-    <button onclick="moverIzquierda()">⬅</button>
-    <button onclick="moverAbajo()">⬇</button>
-    <button onclick="moverDerecha()">➡</button>
-    <br>
-    <button onclick="desaparecerPersonaje()">Desaparecer Personaje</button>
+      <div class="sidebar">
+        <div class="panel stats-panel">
+          <div class="stat-box">
+            <span class="stat-label">Puntos</span>
+            <span id="puntos" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Tiempo</span>
+            <span id="tiempo" class="stat-value">10</span>
+          </div>
+        </div>
+
+        <div class="controles-wrapper">
+          <div class="controles">
+            <div class="d-pad-row">
+              <button class="btn-arrow" onclick="moverArriba()">⬆</button>
+            </div>
+            <div class="d-pad-row">
+              <button class="btn-arrow" onclick="moverIzquierda()">⬅</button>
+              <button class="btn-arrow" onclick="moverAbajo()">⬇</button>
+              <button class="btn-arrow" onclick="moverDerecha()">➡</button>
+            </div>
+          </div>
+          
+          <button class="btn-action" onclick="desaparecerPersonaje()">Desaparecer Personaje</button>
+        </div>
+
+        <div class="panel actions-panel">
+          <button class="btn-reset" onclick="reiniciarJuego()">Reiniciar Juego</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-
-  <div class="panel">
-    <span>Puntos: <span id="puntos">0</span></span>
-    <span>Tiempo: <span id="tiempo">10</span></span>
-  </div>
-
-  <div class="panel">
-    <button onclick="reiniciarJuego()">Reiniciar</button>
-  </div>
-
-  <p id="mensaje"></p>
   <script src="cazando.js"></script>
-
 </body>
 </html>

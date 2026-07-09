@@ -1,42 +1,248 @@
+/* ==========================================================================
+   Variables de Estilo & Reset
+   ========================================================================== */
+:root {
+  --bg-main: #0f172a;        /* Azul oscuro profundo */
+  --bg-card: #1e293b;        /* Azul grisáceo para contenedores */
+  --neon-cyan: #06b6d4;      /* Cian brillante para destacar */
+  --neon-magenta: #d946ef;   /* Magenta para alertas y acentos */
+  --text-main: #f8fafc;      /* Blanco roto para textos */
+  --text-muted: #94a3b8;     /* Gris para textos secundarios */
+  --border-radius: 16px;
+  --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
   text-align: center;
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
   margin: 0;
-  padding: 20px;
-}
-
-h1 {
-  margin-bottom: 5px;
-}
-
-.panel {
-  margin: 15px 0;
-  font-size: 18px;
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Estructura Principal (Layout)
+   ========================================================================== */
+.main-container {
+  max-width: 900px;
+  width: 100%;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 5px 0;
+  background: linear-gradient(to right, var(--neon-cyan), var(--neon-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.autor {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.game-layout {
+  display: flex;
   gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Área del Lienzo (Canvas)
+   ========================================================================== */
+.canvas-container {
+  position: relative;
+  background-color: var(--bg-card);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 canvas {
-  background: white;
-  border: 2px solid black;
+  background: #111827; /* Fondo del juego ligeramente más oscuro */
+  border: 3px solid var(--neon-cyan);
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
 }
 
-.controles {
-  margin-top: 20px;
+/* ==========================================================================
+   Barra Lateral & Paneles
+   ========================================================================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 280px;
+}
+
+.panel {
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* Marcadores de Estadísticas */
+.stats-panel {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--neon-cyan);
+  font-family: monospace;
+}
+
+/* Especial para el tiempo cuando baja */
+#tiempo {
+  color: var(--neon-magenta);
+}
+
+/* ==========================================================================
+   Botones y Controles (D-PAD)
+   ========================================================================== */
+.controles-wrapper {
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+.d-pad-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
 button {
-  margin: 5px;
-  padding: 10px 16px;
-  font-size: 18px;
+  font-family: var(--font-family);
+  border: none;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
 }
 
-#mensaje {
+/* Botones de dirección (Flechas) */
+.btn-arrow {
+  width: 54px;
+  height: 54px;
   font-size: 20px;
+  background-color: #334155;
+  color: var(--text-main);
+  border-radius: 12px;
+  border-bottom: 4px solid #1e293b;
+}
+
+.btn-arrow:hover {
+  background-color: #475569;
+  transform: translateY(-2px);
+}
+
+.btn-arrow:active {
+  transform: translateY(2px);
+  border-bottom-width: 0px;
+}
+
+/* Botón de acción (Desaparecer) */
+.btn-action {
+  width: 100%;
+  padding: 12px;
+  background-color: transparent;
+  border: 2px dashed var(--text-muted);
+  color: var(--text-muted);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.btn-action:hover {
+  border-color: var(--neon-magenta);
+  color: var(--neon-magenta);
+  background-color: rgba(217, 70, 239, 0.05);
+}
+
+/* Botón de Reinicio */
+.btn-reset {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--neon-cyan), #0891b2);
+  color: #000;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(6, 182, 212, 0.3);
+}
+
+.btn-reset:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 15px rgba(6, 182, 212, 0.5);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Feedback del Sistema (Mensajes)
+   ========================================================================== */
+#mensaje {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  margin: 0;
+  padding: 10px;
+  font-size: 1.1rem;
   font-weight: bold;
-  color: darkred;
-  margin-top: 15px;
+  color: #ffffff;
+  background-color: rgba(217, 70, 239, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(217, 70, 239, 0.3);
+  backdrop-filter: blur(4px);
+  /* Se oculta por defecto si está vacío para no romper la estética */
+  display: none;
+}
+
+/* Clase de CSS dinámica en caso de que decidas meter el texto mediante JS */
+#mensaje:not(:empty) {
+  display: block;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  from { transform: translateX(-50%) scale(0.8); opacity: 0; }
+  to { transform: translateX(-50%) scale(1); opacity: 1; }
 }
